@@ -103,7 +103,7 @@ if __name__ == '__main__':
                         help='whether adopts multiprocessing to accelate the preprocess')
 
     args = parser.parse_args()
-    mode = ["train"] #["dev", "test", "train"]
+    mode = ["dev", "test", "train"]
     sign_dict = dict()
     if not os.path.exists(f"./{args.dataset}"):
         os.makedirs(f"./{args.dataset}")
