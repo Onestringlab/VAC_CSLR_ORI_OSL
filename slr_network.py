@@ -45,13 +45,12 @@ class SLRModel(nn.Module):
         self.conv2d = getattr(models, c2d_type)(pretrained=True)
         self.conv2d.fc = Identity()
         self.conv1d = TemporalConv(input_size=512,
-                                   hidden_size=hidden_size,
-                                   conv_type=conv_type,
-                                   use_bn=use_bn,
-                                   num_classes=num_classes)
+                                    hidden_size=hidden_size,
+                                    conv_type=conv_type,
+                                    use_bn=use_bn,
+                                    num_classes=num_classes)
         self.decoder = utils.Decode(gloss_dict, num_classes, 'beam')
-        self.temporal_model = BiLSTMLayer(rnn_type='LSTM', input_size=hidden_size, hidden_size=hidden_size,
-                                          num_layers=2, bidirectional=True)
+        self.temporal_model = BiLSTMLayer(rnn_type='LSTM', input_size=hidden_size, hidden_size=hidden_size, num_layers=2, bidirectional=True)
         if weight_norm:
             self.classifier = NormLinear(hidden_size, self.num_classes)
             self.conv1d.fc = NormLinear(hidden_size, self.num_classes)
@@ -73,7 +72,7 @@ class SLRModel(nn.Module):
         x = torch.cat([inputs[len_x[0] * idx:len_x[0] * idx + lgt] for idx, lgt in enumerate(len_x)])
         x = self.conv2d(x)
         x = torch.cat([pad(x[sum(len_x[:idx]):sum(len_x[:idx + 1])], len_x[0])
-                       for idx, lgt in enumerate(len_x)])
+                        for idx, lgt in enumerate(len_x)])
         return x
 
     def forward(self, x, len_x, label=None, label_lgt=None):
