@@ -126,8 +126,8 @@ class Processor():
                     print('Successfully Remove Weights: {}.'.format(w))
                 else:
                     print('Can Not Remove Weights: {}.'.format(w))
-        weights = self.modified_weights(state_dict['model_state_dict'], False)
-        # weights = self.modified_weights(state_dict['model_state_dict'])
+        # weights = self.modified_weights(state_dict['model_state_dict'], False)
+        weights = self.modified_weights(state_dict['model_state_dict'])
         model.load_state_dict(weights, strict=True)
 
     @staticmethod
