@@ -42,7 +42,7 @@ class SLRModel(nn.Module):
         self.criterion_init()
         self.num_classes = num_classes
         self.loss_weights = loss_weights
-        self.conv2d = getattr(models, c2d_type)(pretrained=True)
+        self.conv2d = getattr(models, c2d_type)(weights=ResNet18_Weights.DEFAULT) #self.conv2d = getattr(models, c2d_type)(pretrained=True)
         self.conv2d.fc = Identity()
         self.conv1d = TemporalConv(input_size=512,
                                     hidden_size=hidden_size,
